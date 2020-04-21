@@ -25,7 +25,7 @@ export interface Stats {
 
 const START_TIMER_MS = 5000
 const DELAY_TIMER_MS = 2500
-const LEVEL_FACTOR = 0.9
+const LEVEL_FACTOR = 0.85
 const LEVEL_INTERVAL = 3
 
 export class GameCore implements GameCoreInterface {
