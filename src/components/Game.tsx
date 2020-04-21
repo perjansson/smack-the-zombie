@@ -67,7 +67,9 @@ export const Game = () => {
   const { viewState, gameStats } = state
 
   return (
-    <ScreenBackground>
+    <ScreenBackground
+      colors={viewState === 'finished' ? ['#943232', '#deadad'] : ['#607552', '#c0dead']}
+    >
       {viewState === 'not_started' && (
         <StartGameModal text="Smack the Corona" onStart={handleOnStart} />
       )}

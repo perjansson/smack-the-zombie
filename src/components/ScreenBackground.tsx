@@ -5,12 +5,13 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 interface ScreenBackgroundProps {
   children: React.ReactNode
+  colors: string[]
   style?: object
 }
 
-export function ScreenBackground({ children }: ScreenBackgroundProps) {
+export function ScreenBackground({ children, colors }: ScreenBackgroundProps) {
   return (
-    <LinearGradient colors={['#607552', '#c0dead']} style={styles.background}>
+    <LinearGradient colors={colors} style={styles.background}>
       {children}
     </LinearGradient>
   )
