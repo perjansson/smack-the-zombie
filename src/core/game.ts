@@ -25,8 +25,10 @@ export interface Stats {
 
 const START_TIMER_MS = 5000
 const DELAY_TIMER_MS = 2500
-const LEVEL_FACTOR = 0.85
 const LEVEL_INTERVAL = 3
+
+const TIMER_FACTOR = 0.85
+const DELAY_FACTOR = 0.8
 
 export class GameCore implements GameCoreInterface {
   callbacks: GameCoreCallbacks
@@ -36,6 +38,7 @@ export class GameCore implements GameCoreInterface {
   currentActive: Tile
   currentTimerMs: number
   currentDelayMs: number
+  currentLevelInterval: number
   timeoutId: number
 
   constructor(callbacks: GameCoreCallbacks) {
@@ -55,9 +58,15 @@ export class GameCore implements GameCoreInterface {
       if (this.currentActive) {
         this.currentActive.active = false
 
-        if (this.stats.numberOfSelections % LEVEL_INTERVAL === 0) {
-          this.currentTimerMs = this.currentTimerMs * LEVEL_FACTOR
-          this.currentDelayMs = this.currentDelayMs * LEVEL_FACTOR
+        if (this.stats.numberOfSelections % this.currentLevelInterval === 0) {
+          console.log(
+            '>change speed after',
+            this.currentLevelInterval,
+            this.stats.numberOfSelections
+          )
+          this.currentTimerMs = this.currentTimerMs * TIMER_FACTOR
+          this.currentDelayMs = this.currentDelayMs * DELAY_FACTOR
+          this.currentLevelInterval *= 2
           this.callbacks.onGameSpeedChange({
             timerMs: this.currentTimerMs,
             delayMs: this.currentDelayMs,
@@ -84,6 +93,7 @@ export class GameCore implements GameCoreInterface {
   startGame = () => {
     this.currentTimerMs = START_TIMER_MS
     this.currentDelayMs = DELAY_TIMER_MS
+    this.currentLevelInterval = LEVEL_INTERVAL
     this.gameTiles = new Array(9).fill(null).map((_, i) => ({ id: i, active: false }))
     this.callbacks.onChange(this.gameTiles)
     this.randomizeNewActive(() => {
