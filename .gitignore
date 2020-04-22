@@ -14,8 +14,3 @@ web-report/
 .DS_Store
 
 versions/
-
-# expo
-app.json
-environment.ts
-sentry.json
