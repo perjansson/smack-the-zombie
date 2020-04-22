@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { responsiveWidth } from 'react-native-responsive-dimensions'
+import { useResponsiveWidth } from 'react-native-responsive-dimensions'
 import { useOrientationResponsiveHeight } from '../util'
 import { CountText } from './CountText'
 
@@ -10,6 +10,7 @@ interface StatsCounterProps {
 
 export const StatsCounter = ({ value }: StatsCounterProps) => {
   const containerStyle = {
+    width: useResponsiveWidth(100),
     height: useOrientationResponsiveHeight(25, 15),
   }
 
@@ -22,7 +23,6 @@ export const StatsCounter = ({ value }: StatsCounterProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: responsiveWidth(100),
     alignItems: 'center',
     justifyContent: 'center',
   },
