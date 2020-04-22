@@ -40,13 +40,13 @@ export const StartGameModal = ({ text, subText, onStart }: StartGameModalProps) 
   }, [])
 
   const textStyle = {
-    fontSize: useOrientationResponsiveFontSize(7, 6),
-    lineHeight: useOrientationResponsiveFontSize(7, 6),
+    fontSize: useOrientationResponsiveFontSize(8, 7),
+    lineHeight: useOrientationResponsiveFontSize(8, 7),
   }
 
   const subTextStyle = {
-    fontSize: useOrientationResponsiveFontSize(3, 2),
-    lineHeight: useOrientationResponsiveFontSize(3, 2),
+    fontSize: useOrientationResponsiveFontSize(5.5, 5.5),
+    lineHeight: useOrientationResponsiveFontSize(5.5, 5.5),
   }
 
   const startButtonStyle = {

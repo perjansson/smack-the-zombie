@@ -87,7 +87,7 @@ export const Game = () => {
       {viewState === 'finished' && (
         <StartGameModal
           text="Game over"
-          subText={`You survived ${gameStats.numberOfSelections} smacks!`}
+          subText={`${gameStats.numberOfSelections} smacks!`}
           onStart={handleOnStart}
         />
       )}
