@@ -40,8 +40,8 @@ export const StartGameModal = ({ text, subText, onStart }: StartGameModalProps) 
   }, [])
 
   const textStyle = {
-    fontSize: useOrientationResponsiveFontSize(8, 7),
-    lineHeight: useOrientationResponsiveFontSize(8, 7),
+    fontSize: useOrientationResponsiveFontSize(8, 6),
+    lineHeight: useOrientationResponsiveFontSize(8, 6),
   }
 
   const subTextStyle = {
