@@ -26,9 +26,10 @@ export interface Stats {
 const START_TIMER_MS = 5000
 const DELAY_TIMER_MS = 2500
 const LEVEL_INTERVAL = 3
+const MAX_LEVEL_INTERVAL = 15
 
-const TIMER_FACTOR = 0.85
-const DELAY_FACTOR = 0.8
+const TIMER_FACTOR = 0.75
+const DELAY_FACTOR = 0.75
 
 export class GameCore implements GameCoreInterface {
   callbacks: GameCoreCallbacks
@@ -62,7 +63,7 @@ export class GameCore implements GameCoreInterface {
         if (this.stats.numberOfSelections % this.currentLevelInterval === 0) {
           this.currentTimerMs = this.currentTimerMs * TIMER_FACTOR
           this.currentDelayMs = this.currentDelayMs * DELAY_FACTOR
-          this.currentLevelInterval *= 2
+          this.currentLevelInterval = Math.min(MAX_LEVEL_INTERVAL, this.currentLevelInterval * 2)
           this.callbacks.onGameSpeedChange({
             timerMs: this.currentTimerMs,
             delayMs: this.currentDelayMs,
