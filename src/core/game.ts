@@ -3,10 +3,13 @@ import { Tile } from '../types'
 export interface GameCoreInterface {
   startGame: () => void
   select: (tile: Tile) => boolean
+  getStats: () => Stats
 }
 
 export interface GameCoreCallbacks {
-  onChange: (gameTiles: Tile[]) => void
+  onCountdownStart: () => void
+  onGameStart: () => void
+  onGameTilesChange: (gameTiles: Tile[]) => void
   onGameSpeedChange: (gameSpeed: Speed) => void
   onGameOver: (stats: Stats) => void
 }
@@ -24,7 +27,7 @@ export interface Stats {
 }
 
 const START_TIMER_MS = 5000
-const DELAY_TIMER_MS = 2500
+const DELAY_TIMER_MS = 3000
 const LEVEL_INTERVAL = 3
 const MAX_LEVEL_INTERVAL = 15
 
@@ -71,12 +74,12 @@ export class GameCore implements GameCoreInterface {
         }
       }
 
-      this.callbacks.onChange(this.gameTiles)
+      this.callbacks.onGameTilesChange(this.gameTiles)
 
       setTimeout(() => {
         newActive.active = true
         this.currentActive = newActive
-        this.callbacks.onChange(this.gameTiles)
+        this.callbacks.onGameTilesChange(this.gameTiles)
         this.startTimer()
         callback && callback()
       }, this.currentDelayMs)
@@ -92,7 +95,8 @@ export class GameCore implements GameCoreInterface {
     this.currentDelayMs = DELAY_TIMER_MS
     this.currentLevelInterval = LEVEL_INTERVAL
     this.gameTiles = new Array(9).fill(null).map((_, i) => ({ id: i, active: false }))
-    this.callbacks.onChange(this.gameTiles)
+    this.callbacks.onCountdownStart()
+    this.callbacks.onGameTilesChange(this.gameTiles)
     this.randomizeNewActive(() => {
       this.stats = {
         startTime: new Date().getTime(),
@@ -100,6 +104,7 @@ export class GameCore implements GameCoreInterface {
         totalTime: undefined,
         numberOfSelections: 0,
       }
+      this.callbacks.onGameStart()
     })
   }
 
@@ -123,4 +128,6 @@ export class GameCore implements GameCoreInterface {
 
     return false
   }
+
+  getStats = () => this.stats
 }

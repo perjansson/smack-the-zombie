@@ -16,7 +16,6 @@ const imageRefs = {}
 
 export const GameGrid = memo(({ grid, onSelect }: GameGridProps) => {
   const containerStyle = {
-    marginTop: useOrientationResponsiveHeight(25, 15) - Constants.statusBarHeight,
     marginHorizontal: useOrientationResponsiveWidth(2, 10),
     height: useOrientationResponsiveHeight(50, 70),
   } as object

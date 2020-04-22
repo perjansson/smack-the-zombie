@@ -1,12 +1,14 @@
 import React, { useReducer, useState, useRef, useMemo, useCallback, useEffect } from 'react'
 import { Audio } from 'expo-av'
 
-import { GameCore, Stats, Speed, GameCoreInterface } from '../core/game'
+import { GameCore, Stats, Speed, GameCoreInterface, GameCoreCallbacks } from '../core/game'
 import { reducer, initialState } from '../reducer'
 import { ScreenBackground } from './ScreenBackground'
 import { StartGameModal } from './StartGameModal'
 import { GameGrid } from './GameGrid'
 import { Tile } from '../types'
+import { CountDown } from './CountDown'
+import { StatsCounter } from './StatsCounter'
 
 export const Game = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -38,9 +40,11 @@ export const Game = () => {
     }
   }
 
-  const callbacks = useMemo(
+  const callbacks: GameCoreCallbacks = useMemo(
     () => ({
-      onChange: (gameTiles: Tile[]) => setTiles([...gameTiles]),
+      onCountdownStart: () => dispatch({ type: 'count_down' }),
+      onGameStart: () => dispatch({ type: 'start_game' }),
+      onGameTilesChange: (gameTiles: Tile[]) => setTiles([...gameTiles]),
       onGameSpeedChange: (speed: Speed) => {},
       onGameOver: (stats: Stats) => {
         playSound(gameOverSoundInstance.current)
@@ -53,7 +57,6 @@ export const Game = () => {
   const gameCoreRef: React.MutableRefObject<GameCoreInterface> = useRef(new GameCore(callbacks))
 
   const handleOnStart = useCallback(() => {
-    dispatch({ type: 'start_game' })
     gameCoreRef.current.startGame()
   }, [])
 
@@ -61,6 +64,7 @@ export const Game = () => {
     const wasHit = gameCoreRef.current.select(tile)
     if (wasHit) {
       playSound(smackSoundInstance.current)
+      dispatch({ type: 'update_stats', payload: gameCoreRef.current.getStats() })
     }
   }, [])
 
@@ -73,8 +77,12 @@ export const Game = () => {
       {viewState === 'not_started' && (
         <StartGameModal text="Smack the Corona" onStart={handleOnStart} />
       )}
-      {viewState === 'started' && tiles.length > 0 && (
-        <GameGrid grid={tiles} onSelect={handleOnSelect} />
+      {(viewState === 'counting_down' || viewState === 'started') && (
+        <>
+          {viewState === 'counting_down' && <CountDown initialValue={3} />}
+          {viewState === 'started' && <StatsCounter value={gameStats?.numberOfSelections || 0} />}
+          <GameGrid grid={tiles} onSelect={handleOnSelect} />
+        </>
       )}
       {viewState === 'finished' && (
         <StartGameModal
