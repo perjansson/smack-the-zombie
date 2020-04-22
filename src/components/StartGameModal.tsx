@@ -28,29 +28,15 @@ interface StartGameModalProps {
 }
 
 export const StartGameModal = ({ text, subText, onStart }: StartGameModalProps) => {
-  const animatedHeightStart = orientationResponsiveHeight(170, 230) as number
-  const animatedHeightEnd = orientationResponsiveHeight(240, 350) as number
-
-  const animatedWidthStart = orientationResponsiveWidth(150, 230) as number
-  const animatedWidthEnd = orientationResponsiveWidth(240, 350) as number
-
-  const animatedHeight = new Animated.Value(animatedHeightStart)
-  const animatedWidth = new Animated.Value(animatedWidthStart)
+  const scale = new Animated.Value(0.7)
 
   useEffect(() => {
-    setTimeout(() => {
-      Animated.timing(animatedHeight, {
-        toValue: animatedHeightEnd,
-        duration: 1000,
-        easing: Easing.elastic(2),
-      }).start()
-
-      Animated.timing(animatedWidth, {
-        toValue: animatedWidthEnd,
-        duration: 1000,
-        easing: Easing.elastic(2),
-      }).start()
-    }, 500)
+    Animated.timing(scale, {
+      delay: 1000,
+      toValue: 1,
+      duration: 1500,
+      easing: Easing.elastic(2),
+    }).start()
   }, [])
 
   const textStyle = {
@@ -64,8 +50,9 @@ export const StartGameModal = ({ text, subText, onStart }: StartGameModalProps) 
   }
 
   const startButtonStyle = {
-    height: animatedHeight,
-    width: animatedWidth,
+    height: orientationResponsiveHeight(240, 350),
+    width: orientationResponsiveWidth(240, 350),
+    transform: [{ scale }],
   }
 
   return (
