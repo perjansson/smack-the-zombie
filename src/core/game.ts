@@ -60,11 +60,6 @@ export class GameCore implements GameCoreInterface {
         this.currentActive = undefined
 
         if (this.stats.numberOfSelections % this.currentLevelInterval === 0) {
-          console.log(
-            '>change speed after',
-            this.currentLevelInterval,
-            this.stats.numberOfSelections
-          )
           this.currentTimerMs = this.currentTimerMs * TIMER_FACTOR
           this.currentDelayMs = this.currentDelayMs * DELAY_FACTOR
           this.currentLevelInterval *= 2
@@ -118,7 +113,6 @@ export class GameCore implements GameCoreInterface {
   select = (tile: Tile) => {
     // Check that there is not already a selection ongoing (no this.timeoutId)
     if (this.timeoutId !== undefined && this.currentActive === tile) {
-      console.log('SMACK!!')
       clearTimeout(this.timeoutId)
       this.timeoutId === undefined
       this.stats.numberOfSelections++
