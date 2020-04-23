@@ -8,18 +8,14 @@ import {
   Animated,
   Easing,
 } from 'react-native'
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions'
+
 import {
-  responsiveWidth,
-  responsiveHeight,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions'
-import {
-  useOrientationResponsiveHeight,
-  useOrientationResponsiveWidth,
   orientationResponsiveHeight,
   orientationResponsiveWidth,
   useOrientationResponsiveFontSize,
 } from '../util'
+import { TopList } from './TopList'
 
 interface StartGameModalProps {
   text: string
@@ -40,13 +36,13 @@ export const StartGameModal = ({ text, subText, onStart }: StartGameModalProps) 
   }, [])
 
   const textStyle = {
-    fontSize: useOrientationResponsiveFontSize(8, 6),
-    lineHeight: useOrientationResponsiveFontSize(8, 6),
+    fontSize: useOrientationResponsiveFontSize(7, 5),
+    lineHeight: useOrientationResponsiveFontSize(7, 5),
   }
 
   const subTextStyle = {
-    fontSize: useOrientationResponsiveFontSize(5.5, 5.5),
-    lineHeight: useOrientationResponsiveFontSize(5.5, 5.5),
+    fontSize: useOrientationResponsiveFontSize(4.5, 4.5),
+    lineHeight: useOrientationResponsiveFontSize(4.5, 4.5),
   }
 
   const startButtonStyle = {
@@ -60,6 +56,7 @@ export const StartGameModal = ({ text, subText, onStart }: StartGameModalProps) 
       <View style={styles.overlay}>
         <Text style={[styles.text, textStyle]}>{text}</Text>
         {subText && <Text style={[styles.text, subTextStyle]}>{subText}</Text>}
+        <TopList />
         <TouchableWithoutFeedback onPress={onStart}>
           <Animated.Image
             style={[styles.startButton, startButtonStyle]}
@@ -82,7 +79,7 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(1),
     textAlign: 'center',
     fontFamily: 'permanent-marker',
-    color: '#062e11',
+    color: '#0f5221',
     shadowOffset: {
       width: responsiveWidth(0.5),
       height: responsiveWidth(0.5),

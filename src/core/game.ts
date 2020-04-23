@@ -1,4 +1,5 @@
 import { Tile } from '../types'
+import localStorage from '../localStorage'
 
 export interface GameCoreInterface {
   startGame: () => void
@@ -108,11 +109,12 @@ export class GameCore implements GameCoreInterface {
     })
   }
 
-  stopGame = () => {
+  stopGame = async () => {
     this.stats.stopTime = new Date().getTime()
     this.stats.totalTime = new Date(Math.floor(this.stats.stopTime - this.stats.startTime))
       .toISOString()
       .substr(11, 8)
+    await localStorage.setStat(this.stats)
     this.callbacks.onGameOver(this.stats)
   }
 
