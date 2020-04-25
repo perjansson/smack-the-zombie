@@ -63,16 +63,16 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: '#062e11',
+    borderBottomColor: '#3d0000',
   },
   topListText: {
     fontFamily: 'permanent-marker',
-    color: '#062e11',
+    color: '#3d0000',
     textAlign: 'center',
   },
   text: {
     flex: 1,
     fontFamily: 'permanent-marker',
-    color: '#062e11',
+    color: '#3d0000',
   },
 })

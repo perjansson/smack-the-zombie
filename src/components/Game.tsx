@@ -72,10 +72,10 @@ export const Game = () => {
 
   return (
     <ScreenBackground
-      colors={viewState === 'finished' ? ['#943232', '#deadad'] : ['#607552', '#c0dead']}
+      colors={viewState === 'finished' ? ['#62000030', '#620000'] : ['#62000050', '#62000099']}
     >
       {viewState === 'not_started' && (
-        <StartGameModal text="Smack the Corona" onStart={handleOnStart} />
+        <StartGameModal text="Smack the Zombie" onStart={handleOnStart} />
       )}
       {(viewState === 'counting_down' || viewState === 'started') && (
         <>

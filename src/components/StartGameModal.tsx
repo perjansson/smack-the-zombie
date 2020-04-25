@@ -24,20 +24,20 @@ interface StartGameModalProps {
 }
 
 export const StartGameModal = ({ text, subText, onStart }: StartGameModalProps) => {
-  const scale = new Animated.Value(0.7)
+  const scale = new Animated.Value(0.8)
 
   useEffect(() => {
     Animated.timing(scale, {
       delay: 1000,
       toValue: 1,
-      duration: 1500,
-      easing: Easing.elastic(2),
+      duration: 2000,
+      easing: Easing.elastic(5),
     }).start()
   }, [])
 
   const textStyle = {
-    fontSize: useOrientationResponsiveFontSize(7, 5),
-    lineHeight: useOrientationResponsiveFontSize(7, 5),
+    fontSize: useOrientationResponsiveFontSize(7, 6),
+    lineHeight: useOrientationResponsiveFontSize(7, 6),
   }
 
   const subTextStyle = {
@@ -46,21 +46,21 @@ export const StartGameModal = ({ text, subText, onStart }: StartGameModalProps) 
   }
 
   const startButtonStyle = {
-    height: orientationResponsiveHeight(240, 350),
+    height: orientationResponsiveHeight(300, 440),
     width: orientationResponsiveWidth(240, 350),
     transform: [{ scale }],
   }
 
   return (
     <Modal animated animationType="fade" transparent visible={true}>
-      <View style={styles.overlay}>
+      <View style={styles.container}>
         <Text style={[styles.text, textStyle]}>{text}</Text>
         {subText && <Text style={[styles.text, subTextStyle]}>{subText}</Text>}
         <TopList />
         <TouchableWithoutFeedback onPress={onStart}>
           <Animated.Image
             style={[styles.startButton, startButtonStyle]}
-            source={require('../../assets/start-button.png')}
+            source={require('../../assets/start.png')}
           />
         </TouchableWithoutFeedback>
       </View>
@@ -69,20 +69,19 @@ export const StartGameModal = ({ text, subText, onStart }: StartGameModalProps) 
 }
 
 const styles = StyleSheet.create({
-  overlay: {
+  container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#33914e10',
   },
   text: {
     marginTop: responsiveHeight(1),
     textAlign: 'center',
     fontFamily: 'permanent-marker',
-    color: '#0f5221',
+    color: '#620000',
     shadowOffset: {
-      width: responsiveWidth(0.5),
-      height: responsiveWidth(0.5),
+      width: responsiveWidth(0.7),
+      height: responsiveWidth(0.7),
     },
     shadowOpacity: 0.2,
     shadowRadius: 0,

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Smack Corona",
-    "slug": "smack-corona",
+    "name": "Smack the Zombie",
+    "slug": "smack-zombie",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
@@ -11,19 +11,19 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#c0dead"
+      "backgroundColor": "#b54e4e"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.pichdude.smackcorona",
+      "bundleIdentifier": "com.pichdude.smackzombie",
       "buildNumber": "1.0.2",
       "supportsTablet": true
     },
     "android": {
-      "package": "com.pichdude.smackcorona",
+      "package": "com.pichdude.smackzombie",
       "permissions": [],
       "versionCode": 1
     }

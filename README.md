@@ -1,4 +1,4 @@
-# SMACK-CORONA
+# SMACK-THE-ZOMBIE
 
 Mobile game built with Expo in React Native.
 

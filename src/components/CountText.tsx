@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Animated } from 'react-native'
 import { useOrientationResponsiveHeight, useOrientationResponsiveWidth } from '../util'
+import { responsiveWidth } from 'react-native-responsive-dimensions'
 
 interface CountTextProps {
   value: number
@@ -33,6 +34,6 @@ export const CountText = ({ value }: CountTextProps) => {
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'permanent-marker',
-    color: '#126328',
+    color: '#3d0000',
   },
 })
